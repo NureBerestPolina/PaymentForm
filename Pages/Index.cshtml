@@ -1,10 +1,21 @@
 ﻿@page
+@using PaymentForm.Services;
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
+@inject ProductService ProductService
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Our Products</h1>
+<div class="row">
+    @foreach (var product in ProductService.GetAllProducts())
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text"><strong>Price:</strong> $@product.Price</p>
+                    <a class="btn btn-warning" asp-page="/Checkout" asp-route-id="@product.Id" class="btn btn-primary">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>

@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@using PaymentForm.Services;
+@model CheckoutModel
+@inject ProductService ProductService
+@{
+    var product = ProductService.GetProductById(Model.ProductId);
+}
+
+<h1>Checkout</h1>
+<p>Product: @product.Name</p>
+<p>Description: @product.Description</p>
+<p>Price: $@product.Price</p>
+
+<form method="post">
+    <button type="submit" class="btn btn-success">Pay with Stripe</button>
+</form>
+
